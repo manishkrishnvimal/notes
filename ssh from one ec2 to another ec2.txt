@@ -1,0 +1,10 @@
+https://stackoverflow.com/questions/36300446/ssh-permission-denied-publickey-gssapi-with-mic
+https://superuser.com/questions/1135766/how-to-ssh-from-one-ec2-instance-to-another
+
+Once you're logged into the EC2 instance, make sure that the ~/.ssh directory and authorized_keys file have the correct permissions
+chmod 700 ~/.ssh
+chmod 600 ~/.ssh/authorized_keys
+
+The ~/.ssh directory should be owned by the ec2-user:
+chown ec2-user:ec2-user ~/.ssh
+chown ec2-user:ec2-user ~/.ssh/authorized_keys
