@@ -1,5 +1,32 @@
+referenced resource url:
 https://stackoverflow.com/questions/36300446/ssh-permission-denied-publickey-gssapi-with-mic
 https://superuser.com/questions/1135766/how-to-ssh-from-one-ec2-instance-to-another
+
+Step 1:
+On each server run:
+ssh-keygen
+
+Step 2:
+Hit enter enter enter. You'll have two files:
+.ssh/id_rsa
+.ssh/id_rsa.pub
+
+step 3:
+On Server A, cat and copy to clipboard the public key:
+cat ~/.ssh/id_rsa.pub
+[select and copy to your clipboard]
+
+Step 4:
+ssh into Server B, and append the contents of that to the it's authorized_keys file:
+cat >> ~/.ssh/authorized_keys
+[paste your clipboard contents]
+[ctrl+d to exit]
+
+step 5:
+ssh -i ~/.ssh/id_rsa private.ip.of.other.server
+
+TroubleShooting:
+
 
 Once you're logged into the EC2 instance, make sure that the ~/.ssh directory and authorized_keys file have the correct permissions
 chmod 700 ~/.ssh
