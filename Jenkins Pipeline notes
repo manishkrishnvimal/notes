@@ -1,0 +1,14 @@
+// for sending email when a jov fails. This step is added at the last after all stages. 
+post {
+    failure {
+            emailext(
+                subject: "Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' Failed",
+                body: "Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' has failed. Check console output at ${env.BUILD_URL}.",
+                to: 'user@example.com'
+                )
+            }
+    }
+
+// This will be written within script and it will serve the purpose "Even if one stage fails pipeline will continue to execute till last stage"
+ catchError(buildResult:'SUCCESS', stageResult:'Failure'){
+        }
