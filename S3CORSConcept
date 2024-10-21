@@ -16,7 +16,7 @@ Add bucket policy and make it public just like first bucket
 Upload extra-page.html here and try to fetch object url. This url should show the content of extra-page.html
 Now enable CORS in this bucket 
 ##################################
-Add the json in CORS
+Add the below json in CORS
 in allowed orgins pass the first bucket url
 ###################################
 [
