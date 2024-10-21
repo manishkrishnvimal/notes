@@ -1,3 +1,10 @@
+Create one S3 bucket 
+Get into properties section and in the end select static website hosting and enable it
+Upload an index.html file and remove block public access if applied before.
+Get into properties section and set up bukcet policy so that object content can be read publicly.
+Go to static website hosting section in properties and find out the url.
+Once you hit the url , you'll see the content of index.html as response on browser
+
 ####################################################
 #Bucket policy for static website hosting
 ####################################################
