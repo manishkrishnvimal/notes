@@ -3,18 +3,47 @@ Object of a bucket can be fetched in another bucket
 
 Step1 : 
 for e.g first bucket : manishtiwari
-Create First S3 bucket and enable static website hosting
-upload index.html page to see the content of index.html while hitting bucket url in browser
-create extra-page.html and upload this one too which will be fetched in index.html
+1)Create First S3 bucket and enable static website hosting
+2)upload index.html page to see the content of index.html while hitting bucket url in browser
+3)Because index.html has fetch option for extra-page.html and this file is yet not uploaded in the bucket 
+so you'll see 404 error on console output and in inspect---> network 
+4) upload extra-page.html in this bucket only and now error will be removed because it got the file just parallel to index.html
+
 
 
 Step2:
-for e.g first bucket : mktttttt
-remove extra-page.html from this bucket and hit the url. You will see the error message in inspect-->network
-create another bucket in another region and enable static website hosting
-Add bucket policy and make it public just like first bucket
-Upload extra-page.html here and try to fetch object url. This url should show the content of extra-page.html
-Now enable CORS in this bucket 
+for e.g second bucket : mktttttt
+1) Create second bucket with name mkttttt and this will be in different region than first one.
+2) remove extra-page.html from first bucket and hit the url. You will see the error message in inspect-->network
+but you won't see the error on console or on browser because it is now trying to fetch the extra-page.html from another bucket.
+as we have commented first fetch command and uncommented second fetch which will work as CORS.
+3) enable static website hosting for this second bucket as well and pass index.html as file name 
+although there is no need to upload the index.html file here
+4) Upload extra-page.html and this object url be used within fetch in index.html which is present in first bucket.
+5) Add bucket policy and make it public just like first bucket. 
+In Policy resource arn will be updated accoring to present bucket. 
+6) try to fetch object url of extra-page.html. This url should show the content of extra-page.html
+7) Now enable CORS in this bucket and add below json in cors in this second bucket
+8) Once above steps are done, try hitting the static website url of first bucket. It will be able to show 
+the content of index.html and extra-page.html both. 
+9) Congratulations, CORS (cross origin resource sharing worked).
+
+
+####################################################
+#Bucket policy for static website hosting
+####################################################
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "PublicReadGetObject",
+            "Effect": "Allow",
+            "Principal": "*",
+            "Action": "s3:GetObject",
+            "Resource": "arn:aws:s3:::manishtiwari/*"
+        }
+    ]
+}
 ##################################
 Add the below json in CORS
 in allowed orgins pass the first bucket url
