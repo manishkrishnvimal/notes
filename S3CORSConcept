@@ -1,0 +1,66 @@
+Cors--- cross origin resource sharing 
+Object of a bucket can be fetched in another bucket
+
+Step1 : 
+for e.g first bucket : manishtiwari
+Create First S3 bucket and enable static website hosting
+upload index.html page to see the content of index.html while hitting bucket url in browser
+create extra-page.html and upload this one too which will be fetched in index.html
+
+
+Step2:
+for e.g first bucket : mktttttt
+remove extra-page.html from this bucket and hit the url. You will see the error message in inspect-->network
+create another bucket in another region and enable static website hosting
+Add bucket policy and make it public just like first bucket
+Upload extra-page.html here and try to fetch object url. This url should show the content of extra-page.html
+Now enable CORS in this bucket 
+##################################
+Add the json in CORS
+in allowed orgins pass the first bucket url
+###################################
+[
+    {
+        "AllowedHeaders": [
+            "Authorization"
+        ],
+        "AllowedMethods": [
+            "GET"
+        ],
+        "AllowedOrigins": [
+            "http://manishtiwari.s3-website.ap-south-1.amazonaws.com"
+        ],
+        "ExposeHeaders": [],
+        "MaxAgeSeconds": 3000
+    }
+]
+###################################################
+index.html
+in fetch once CORS is enabled pass the object url which is in second bucket
+###################################################
+<html>
+    <head>
+        <title>My First Webpage</title>
+    </head>
+    <body>
+        <p>Static WebSite hosted</p>
+        <h1>Welcome to Static WebSite Hosting Demo</h1>
+    </body>
+
+    <img src="manishpic.jpg" width=250/>
+
+    <!---CORS DEMO-->
+    <div id="tofetch">
+    <script>
+        var tofetch = document.getElementById("tofetch");
+        //fetch('extra-page.html')
+        fetch('https://mktttttttttt.s3.amazonaws.com/extra-page.html')
+        . then((respnse) => {
+            return respnse.text();
+        })
+        . then((html) => {
+             tofetch.innerHTML = html
+        });
+    </script>
+    </div>
+</html>
