@@ -1,0 +1,17 @@
+#########################################################################
+Script to create user and give acces to some ec2
+#########################################################################
+Step 1
+For windows, use puttygen to generate key-pair RSA 2048
+
+For ubuntu  ssh-keygen -t rsa -b 2048 -f ~/.ssh/my_key
+Step 2
+sudo useradd -m -d /home/grafana grafana -s /bin/bash
+sudo passwd grafana
+https://it-tools.tech/token-generator?length=15   4IQQJFjo8DV1Jw8
+sudo su - grafana
+cd grafana
+mkdir .ssh
+cd .ssh
+vi authorized_keys // put that public key here which is in step 1
+chmod 400 authorized_keys
