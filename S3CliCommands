@@ -1,0 +1,13 @@
+To execute these commands you can run aws configure sso on your local machine (command prompt). Once you're done with profile creation run aws s3 ls or 
+any other commands like sync, list objects etc.
+
+create bucket from console and cli & do all below operations:
+aws s3 mb s3://your-bucket-name----------------------------------------create bucket 
+aws s3 cp /path/to/local/file s3://your-bucket-name/------------------upload objects
+aws s3 cp s3://your-bucket-name/your-file /path/to/local/-----------download objects
+aws s3 ls s3://your-bucket-name/------------------------------------------list objects inside the bucket
+aws s3 rm s3://your-bucket-name/your-file-----------------------------delete objects from the bucket
+aws s3 rm s3://your-bucket-name/ --recursive-------------------------delete all objects inside a bucket
+aws s3 sync /path/to/local/directory s3://your-bucket-name/--------sync local files to bucket
+aws s3 sync s3://your-bucket-name/ /path/to/local/directory--------sync bucket objects to local
+
