@@ -93,3 +93,15 @@ in fetch once CORS is enabled pass the object url which is in second bucket
     </script>
     </div>
 </html>
+
+#######################################
+extra-page.html
+#######################################
+<html>
+    <head>
+        <title>My First Webpage</title>
+    </head>
+    <body>
+        <h1>This is extra html webapage</h1>
+    </body>
+</html>
