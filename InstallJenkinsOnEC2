@@ -1,0 +1,37 @@
+Create One Public EC2 machine
+Once ec2 machine is ready , go with further steps for download:
+
+1) Ensure that your software packages are up to date on your instance by using the following command to perform a quick software update:
+   sudo yum update –y
+2) Add the Jenkins repo using the following command:
+    sudo wget -O /etc/yum.repos.d/jenkins.repo https://pkg.jenkins.io/redhat-stable/jenkins.repo
+3) Import a key file from Jenkins-CI to enable installation from the package:
+   sudo rpm --import https://pkg.jenkins.io/redhat-stable/jenkins.io-2023.key
+   sudo yum upgrade
+4) Install Java (Amazon Linux 2023):
+    sudo dnf install java-17-amazon-corretto -y
+5) Install Jenkins:
+    sudo yum install jenkins -y
+6) Enable the Jenkins service to start at boot:
+   sudo systemctl enable jenkins
+7) Start Jenkins as a service:
+   sudo systemctl start jenkins
+8) You can check the status of the Jenkins service using the command:
+   sudo systemctl status jenkins
+
+Now Jenkins is running on your EC2 machine
+We will configure the Jenkins now
+
+1) Connect to http://<your_server_public_DNS>:8080 from your browser. You will be able to access Jenkins through its management interface:
+2) As prompted, enter the password found in /var/lib/jenkins/secrets/initialAdminPassword.
+    sudo cat /var/lib/jenkins/secrets/initialAdminPassword
+3) The Jenkins installation script directs you to the Customize Jenkins page. Click Install suggested plugins.
+4) Once the installation is complete, the Create First Admin User will open. Enter your information, and then select Save and Continue.
+5) On the left-hand side, select Manage Jenkins, and then select Manage Plugins.
+6) Select the Available tab, and then enter Amazon EC2 plugin at the top right.
+7) Select the checkbox next to Amazon EC2 plugin, and then select Install without restart.
+8) Once the installation is done, select Back to Dashboard.
+9) Select Configure a cloud if there are no existing nodes or clouds.
+10) If you already have other nodes or clouds set up, select Manage Jenkins
+11) After navigating to Manage Jenkins, select Configure Nodes and Clouds from the left hand side of the page.
+12) Select Add a new cloud, and select Amazon EC2. A collection of new fields appears.
